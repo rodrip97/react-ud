@@ -142,3 +142,60 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+
+// data destructuring
+
+const books = getBooks();
+books;
+
+const book = getBook(1);
+
+/* const author = book.author;
+const title = book.title; */
+
+const { title, author, genres, hasMovieAdaptation, pages, publicationDate } =
+  book;
+
+/* const primaryGenre = genres[0];
+const secondaryGenre = genres[1]; */
+
+const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
+
+primaryGenre;
+secondaryGenre;
+otherGenres;
+console.log(title, author, primaryGenre, secondaryGenre);
+
+// create a new genre and add it to the end of previous genre array
+
+const newGenre = [...genres, "Epic Fantasy"];
+newGenre;
+
+//
+const updatedBook = {
+  //spread the array
+  ...book,
+
+  //add new property
+  moviePublicationDate: "2001-12-19",
+
+  //overwritting an existing property
+  pages: 1210,
+};
+
+updatedBook;
+
+// template literals
+
+const summary = `${title}, is a book written by: ${author}. It is ${pages} pages long and was published in ${
+  publicationDate.split("-")[0]
+} `;
+summary;
+
+// terniary operators
+
+const pagesRange =
+  pages > 1000
+    ? "book has over a thousand pages"
+    : "book has under 1000 pages ";
+pagesRange;
