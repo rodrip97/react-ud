@@ -144,21 +144,21 @@ function getBook(id) {
 }
 
 // data destructuring
-
+/* 
 const books = getBooks();
 books;
 
-const book = getBook(1);
+const book = getBook(3);
 
 /* const author = book.author;
 const title = book.title; */
-
+/*
 const { title, author, genres, hasMovieAdaptation, pages, publicationDate } =
   book;
-
+*/
 /* const primaryGenre = genres[0];
 const secondaryGenre = genres[1]; */
-
+/*
 const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
 
 primaryGenre;
@@ -199,3 +199,140 @@ const pagesRange =
     ? "book has over a thousand pages"
     : "book has under 1000 pages ";
 pagesRange;
+
+//   ARROW FUNCTION REVIEW  //
+// ----------------------- //
+
+//regular function
+function getYear(str) {
+  return str.split("-")[0];
+}
+
+// SYNTAX IS: argument, arrow and what we want to return
+
+const pubDate = (str) => str.split("-")[0];
+
+console.log(getYear(publicationDate)); // using regular function
+console.log(pubDate(publicationDate)); // using arrow function
+
+// for example sake here's a multiple line arrow function:
+
+const pubDate2 = (str) => {
+  //rest of code would go here
+  return str.split("-")[0];
+};
+// END MULTIPLE LINE ARROW FUNC EXAMPLE //
+
+//------------------ Section END --------------------//
+
+// ONTO LOGICAL OPERATORS AND SHOR CIRCUTING
+console.log(true && "some string");
+console.log(false && "some other string");
+console.log(hasMovieAdaptation && "This book has movie adaptation");
+
+// -------- Optional Chaining -------- //
+
+function getReviewTotal(book) {
+  const goodread = book.reviews.goodreads?.reviewsCount ?? 0;
+  const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+
+  return goodread + librarything;
+}
+
+console.log(getReviewTotal(book)); */
+/*
+// --------- ARRAY METHODS ------- //
+const books = getBooks();
+books;
+
+const x = [1, 2, 3, 4, 5].map((el) => el * 2);
+console.log(x);
+
+const titles = books.map((book) => book.title);
+titles;
+
+const essentialData = books.map((book) => {
+  // return an instance of the book object
+  return {
+    title: book.title,
+    author: book.author,
+    genre: book.genres,
+  };
+});
+
+essentialData;
+
+//----------- array filter method -----------//
+const longBooks = books
+  .filter((book) => book.pages > 500) // filter once
+  .filter((book) => book.hasMovieAdaptation); // filter once again to filter obj further, is possible to filter a third time
+longBooks;
+
+const adventureBooks = books
+  .filter((books) => books.genres.includes("adventure"))
+  .map((book) => book.title);
+
+adventureBooks;
+
+// ------- Array Reduce Method -------- //
+// most commonly used for mathematical operations
+
+const pageAllBooks = books.reduce((acc, book) => acc + book.pages, 0);
+pageAllBooks;
+
+/* const pageAllBooks: This declares a constant variable named pageAllBooks that will store the result of the reduction operation.
+books: This is an array of objects representing books. We assume that it is defined elsewhere in the code.
+.reduce(): This is an array method used to reduce an array to a single value.
+ It iterates over each element of the array and applies a function to accumulate a final result.
+(acc, book) => acc + book.pages: This is the callback function provided to the reduce() method.
+ It takes two parameters: acc (short for "accumulator") and book (each element of the books array).
+acc: This represents the accumulated value that is being calculated as the reduction progresses. 
+In this case, it will accumulate the total number of pages.
+book: This represents the current element being processed from the books array.
+acc + book.pages: This expression adds the number of pages (book.pages) to the accumulator (acc).
+ It accumulates the total number of pages as the reduction progresses.
+0: This is the initial value of the accumulator (acc. In this case, it is set to 0, meaning the reduction starts with a total of 0 pages.
+So, the reduce() method is used to iterate over each book in the books array, adding up the number of pages (book.pages) to the accumulator (acc).
+ The result is stored in the pageAllBooks variable, representing the total number of pages in all the books in the books array.
+*/
+
+/*
+// ------- Array Sort Method ------ //
+
+const arr = [6, 3, 7, 8, 2, 5, 1];
+const sorted = arr.slice().sort((a, b) => a - b);
+sorted;
+arr;
+
+const sortedByPage = books.slice().sort((a, b) => a.pages - b.pages);
+sortedByPage;
+
+// -------- Working with Immutable Arrays --------- //
+
+//1) Add a new book object
+const newBook = {
+  id: 6,
+  tile: "Harry Potter and the Chamber of Secrets",
+  author: "J. K. Rowling",
+};
+
+const booksAfterAdding = [...books, newBook]; //add new obj to array using the spreading operator
+
+books;
+booksAfterAdding;
+
+// 2) Delete book from array:
+const booksAfterRemove = booksAfterAdding.filter((book) => book.id !== 3); // basically create a new array where you filter out all books where id = 3
+booksAfterRemove;
+
+// 3) Update object in the array
+const bookAfterUpdate = booksAfterRemove.map((book) =>
+  book.id === 1 ? { ...book, pages: 1210 } : book
+);
+
+bookAfterUpdate;
+*/
+
+// ----- ASYNCRONOUS PROGRAMMING ----//
+
+fetch("https://jsonplaceholder.typicode.com/todos/1");
