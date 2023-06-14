@@ -301,6 +301,7 @@ So, the reduce() method is used to iterate over each book in the books array, ad
 
 const arr = [6, 3, 7, 8, 2, 5, 1];
 const sorted = arr.slice().sort((a, b) => a - b);
+//we add the slice so this way we are creating a new array as a copy of the original one instead of perfroming the operation on it.
 sorted;
 arr;
 
@@ -334,5 +335,16 @@ bookAfterUpdate;
 */
 
 // ----- ASYNCRONOUS PROGRAMMING ----//
+/* 
+fetch("https://jsonplaceholder.typicode.com/todos")
+  .then((res) => res.json())
+  .then((data) => console.log(data));
+ */
 
-fetch("https://jsonplaceholder.typicode.com/todos/1");
+async function getData() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  console.log(data);
+}
+
+getData();
