@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
 
 const pizzaData = [
   {
@@ -48,7 +49,7 @@ const pizzaData = [
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <Header />
       <Menu />
       <Footer />
@@ -57,17 +58,48 @@ function App() {
 }
 
 function Header() {
-  return <h1>Fast React - Italian Pizza Co.</h1>;
+  const styleHeader = {};
+
+  return (
+    <header className="header">
+      <h1 style={styleHeader}>Fast React Pizza Co.</h1>
+    </header>
+  );
 }
 
 function Menu() {
   return (
-    <div>
+    <main className="menu">
       <h2>Our Menu:</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
+
+      <div></div>
+
+      {/*       <Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        photoName="pizzas/spinaci.jpg"
+        price={12}
+      />
+
+      <Pizza
+        name="Pizza Funghi"
+        ingredients="Tomato, mushrooms"
+        photoName="pizzas/funghi.jpg"
+        price={10}
+      /> */}
+    </main>
+  );
+}
+
+function Pizza(props) {
+  return (
+    <div className="pizza">
+      <img src={props.photoName} alt="404" />
+      <div>
+        <h3>{props.name}</h3>
+        <p>{props.ingredients}</p>
+        <span>{props.price + 2}</span>
+      </div>
     </div>
   );
 }
@@ -79,25 +111,17 @@ function Footer() {
 
   if (hour >= openHour && hour <= closeHour) {
     return (
-      <footer>{new Date().toLocaleTimeString()}, We're Currently Open!</footer>
+      <footer className="footer">
+        {new Date().toLocaleTimeString()}, We're Currently Open!
+      </footer>
     );
   } else {
     return (
-      <footer>
+      <footer className="footer">
         {new Date().toLocaleTimeString()}, We're Currently Closed!
       </footer>
     );
   }
-}
-
-function Pizza() {
-  return (
-    <div>
-      <img src="pizzas/margherita.jpg" alt="404" />
-      <h2>Pizza Margherita</h2>
-      <p>Tomato and Mozarella</p>
-    </div>
-  );
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
